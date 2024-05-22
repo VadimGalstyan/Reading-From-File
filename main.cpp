@@ -1,7 +1,7 @@
-#include <iostream>
+  #include <iostream>
 #include <fstream>
 
-enum Type
+enum class Type
 {
     Double,
     Int,
@@ -104,6 +104,25 @@ void stringCopy(char* const ptr,const std::string& str)
     
 }
 
+
+void print(const Values& vals,const Type& type)
+{
+    switch (type)
+    {
+    case Type::Int:
+        std::cout<<"Integer: "<< vals.integerV<<std::endl;
+        break;
+
+    case Type::Double:
+        std::cout<<"Double: "<< vals.doubleV<<std::endl;
+        break;
+
+    case Type::String:
+        std::cout<<"String: "<< vals.arr<<std::endl;
+        break;
+    }
+}
+
 void Data(const std::string& str)
 {
     Type type = determineType(str);
@@ -111,22 +130,21 @@ void Data(const std::string& str)
 
     switch (type)
     {
-    case Int:
+    case Type::Int:
         vals.integerV = stringToInteger(str);
-        std::cout<<"Integer: "<< vals.integerV<<std::endl;
         break;
 
-    case Double:
+    case Type::Double:
         vals.doubleV = stringToDouble(str);
-        std::cout<<"Double: "<< vals.doubleV<<std::endl;
         break;
 
-    case String:
+    case Type::String:
         stringCopy(vals.arr,str);
-        std::cout<<"String: "<< vals.arr<<std::endl;
         break;
     }
+    print(vals,type);
 }
+
 
 int main()
 {
